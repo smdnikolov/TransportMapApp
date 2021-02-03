@@ -20,25 +20,27 @@ const Map = () => {
     const renderStops = (x) => {
 
         return <Marker position={[x.location.lat, x.location.lng]} key={x.id} icon={busStopIcon}>
-            <Popup>
-                {x.name}
+            <Popup >
+                <div className="stop-baloon">
+                    <h3>Спиркa:</h3>
+                    <p>{x.name.toUpperCase()}</p>
+                </div>
             </Popup>
-
-        </Marker>
+        </Marker >
     }
-    const renderSegments = (x) => {
-
+    const renderSegments = (x, color) => {
         let latLngs = []
         x.coordinates.forEach(z => {
             latLngs.push(Object.values(z))
         })
-
-        return <Polyline key={x.id} positions={[latLngs]} color={'blue'} />
+        return <Polyline key={x.id} positions={[latLngs]} color={color} />
     }
 
+    console.log(stopsAB)
     const stopsRouteAB = stopsAB.map(x => renderStops(x))
-    const segmentsRouteAB = segmentsAB.map(x => renderSegments(x))
+    const segmentsRouteAB = segmentsAB.map(x => renderSegments(x, '#0078a8'))
     const stopsRouteBA = stopsBA.map(x => renderStops(x))
+    const segmentsRouteBA = segmentsBA.map(x => renderSegments(x, '#377a4aeb'))
 
     return <div >
         <h1>The map</h1>
@@ -49,8 +51,9 @@ const Map = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {stopsRouteAB}
-                {stopsRouteBA}
                 {segmentsRouteAB}
+                {stopsRouteBA}
+                {segmentsRouteBA}
             </MapContainer>
         </div>
     </div>
