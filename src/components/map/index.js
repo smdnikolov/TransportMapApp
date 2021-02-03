@@ -1,36 +1,56 @@
 import React from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
+import { Icon } from 'leaflet'
 import './styles.css'
 import data from '../../data.json'
 
+
 const Map = () => {
 
+    const stopsAB = data[0].stops
+    const segmentsAB = data[0].segments
+    const stopsBA = data[1].stops
+    const segmentsBA = data[1].segments
 
-    const stops = data[0].stops
-    console.log(stops)
-    let z = stops.map(x => {
-        console.log(x.location)
-        return <Marker position={[x.location.lat, x.location.lng]} key={x.id}>
+    const busStopIcon = new Icon({
+        iconUrl: 'bus-stop.svg',
+        iconSize: [50, 50]
+    })
+
+    const renderStops = (x) => {
+
+        return <Marker position={[x.location.lat, x.location.lng]} key={x.id} icon={busStopIcon}>
             <Popup>
                 {x.name}
             </Popup>
+
         </Marker>
-    })
-    console.log(stops)
+    }
+    const renderSegments = (x) => {
+
+        let latLngs = []
+        x.coordinates.forEach(z => {
+            latLngs.push(Object.values(z))
+        })
+
+        return <Polyline key={x.id} positions={[latLngs]} color={'blue'} />
+    }
+
+    const stopsRouteAB = stopsAB.map(x => renderStops(x))
+    const segmentsRouteAB = segmentsAB.map(x => renderSegments(x))
+    const stopsRouteBA = stopsBA.map(x => renderStops(x))
+
     return <div >
         <h1>The map</h1>
         <div id="mapid">
-            <MapContainer center={[42.697708, 23.321867]} zoom={18} scrollWheelZoom={false}>
+            <MapContainer center={[42.69181499481202, 23.351221656799318]} zoom={14} scrollWheelZoom={false}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[42.697708, 23.321867]}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
-                {z}
+                {stopsRouteAB}
+                {stopsRouteBA}
+                {segmentsRouteAB}
             </MapContainer>
         </div>
     </div>
