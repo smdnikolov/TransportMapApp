@@ -3,9 +3,13 @@ import Map from './components/map'
 
 function App() {
   return (
-    <div className="App">
-      <Map />
-    </div >
+    <div className='container'>
+      <div className="App row">
+        <div className='col'>
+        <Map />
+        </div>
+      </div >
+    </div>
   );
 }
 
