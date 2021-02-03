@@ -2,6 +2,7 @@ h1 {
     text-align: center;
 }
 .leaflet-container {
-    width: 100%;
+    left:10%;
+    width: 80%;
     height: 100vh;
 }
