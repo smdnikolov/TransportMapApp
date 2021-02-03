@@ -17,12 +17,12 @@ const Map = () => {
         iconSize: [50, 50]
     })
 
-    const renderStops = (x) => {
+    const renderStops = (x, index) => {
 
         return <Marker position={[x.location.lat, x.location.lng]} key={x.id} icon={busStopIcon}>
             <Popup >
                 <div className="stop-baloon">
-                    <h3>Спиркa:</h3>
+                    <h3>Спиркa #{index + 1}:</h3>
                     <p>{x.name.toUpperCase()}</p>
                 </div>
             </Popup>
@@ -37,9 +37,9 @@ const Map = () => {
     }
 
     console.log(stopsAB)
-    const stopsRouteAB = stopsAB.map(x => renderStops(x))
+    const stopsRouteAB = stopsAB.map((x, index) => renderStops(x, index))
     const segmentsRouteAB = segmentsAB.map(x => renderSegments(x, '#0078a8'))
-    const stopsRouteBA = stopsBA.map(x => renderStops(x))
+    const stopsRouteBA = stopsBA.map((x, index) => renderStops(x, index))
     const segmentsRouteBA = segmentsBA.map(x => renderSegments(x, '#377a4aeb'))
 
     return <div >
