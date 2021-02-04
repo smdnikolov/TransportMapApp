@@ -1,12 +1,13 @@
 import './App.css';
-import Map from './components/map'
+import Home from './components/home'
+
 
 function App() {
   return (
     <div className='container'>
       <div className="App row">
         <div className='col'>
-        <Map />
+          <Home />
         </div>
       </div >
     </div>

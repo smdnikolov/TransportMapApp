@@ -1,6 +1,10 @@
 import React from 'react'
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
 import { Icon } from 'leaflet'
+import { useSelector, useDispatch } from 'react-redux'
+import { loading, changeAB, changeBA } from '../../actions'
+
+
 import './styles.css'
 import data from '../../data.json'
 
@@ -12,17 +16,22 @@ const Map = () => {
     const stopsBA = data[1].stops
     const segmentsBA = data[1].segments
 
+
     const busStopIcon = new Icon({
         iconUrl: 'bus-stop.svg',
         iconSize: [50, 50]
     })
+
+    const isLoading = useSelector(state => state.isLoading)
+    const routeType = useSelector(state => state.routeType)
+    const dispatch = useDispatch()
 
     const renderStops = (x, index) => {
 
         return <Marker position={[x.location.lat, x.location.lng]} key={x.id} icon={busStopIcon}>
             <Popup >
                 <div className="stop-baloon">
-                    <h3>Спиркa #{index + 1}:</h3>
+                    <h5>Спиркa #{index + 1}:</h5>
                     <p>{x.name.toUpperCase()}</p>
                 </div>
             </Popup>
@@ -36,24 +45,26 @@ const Map = () => {
         return <Polyline key={x.id} positions={[latLngs]} color={color} />
     }
 
-    console.log(stopsAB)
     const stopsRouteAB = stopsAB.map((x, index) => renderStops(x, index))
     const segmentsRouteAB = segmentsAB.map(x => renderSegments(x, '#0078a8'))
     const stopsRouteBA = stopsBA.map((x, index) => renderStops(x, index))
     const segmentsRouteBA = segmentsBA.map(x => renderSegments(x, '#377a4aeb'))
 
+
     return <div >
         <h1>The map</h1>
+        <button onClick={() => dispatch(loading())}>Change loading state</button>
+        <p>isLoading = {isLoading.toString()}</p>
+        <button onClick={() => dispatch(changeAB())}>Show route AB</button>
+        <button onClick={() => dispatch(changeBA())}>Show route BA</button>
         <div id="mapid">
-            <MapContainer center={[42.69181499481202, 23.351221656799318]} zoom={14} scrollWheelZoom={false}>
+            <MapContainer center={[42.69181499481202, 23.351221656799318]} zoom={14} scrollWheelZoom={true}>
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {stopsRouteAB}
-                {segmentsRouteAB}
-                {stopsRouteBA}
-                {segmentsRouteBA}
+                {routeType === 'AB' ? <>{stopsRouteAB}{segmentsRouteAB} </> : ''}
+                {routeType === 'BA' ? <>{stopsRouteBA}{segmentsRouteBA} </> : ''}
             </MapContainer>
         </div>
     </div>
