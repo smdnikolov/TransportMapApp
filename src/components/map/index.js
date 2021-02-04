@@ -1,70 +1,65 @@
 import React from 'react'
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet'
 import { Icon } from 'leaflet'
-import { useSelector, useDispatch } from 'react-redux'
-import { loading, changeAB, changeBA } from '../../actions'
+import { useSelector } from 'react-redux'
+
 
 
 import './styles.css'
-import data from '../../data.json'
-
 
 const Map = () => {
 
-    const stopsAB = data[0].stops
-    const segmentsAB = data[0].segments
-    const stopsBA = data[1].stops
-    const segmentsBA = data[1].segments
-
-
+    const route = useSelector(state => state.route)
+    const mapData = useSelector(state => state.map)
     const busStopIcon = new Icon({
         iconUrl: 'bus-stop.svg',
         iconSize: [50, 50]
     })
-
-    const isLoading = useSelector(state => state.isLoading)
-    const routeType = useSelector(state => state.routeType)
-    const dispatch = useDispatch()
-
     const renderStops = (x, index) => {
 
         return <Marker position={[x.location.lat, x.location.lng]} key={x.id} icon={busStopIcon}>
             <Popup >
-                <div className="stop-baloon">
+                <div className="stop-baloon" id={x.id}>
                     <h5>Спиркa #{index + 1}:</h5>
                     <p>{x.name.toUpperCase()}</p>
                 </div>
             </Popup>
         </Marker >
     }
-    const renderSegments = (x, color) => {
+    const renderSegments = (x) => {
+        let z
+        route.name === 'Зоопарка - ж.к. Левски Г' ? z = '#0078a8' : z = '#377a4aeb'
         let latLngs = []
         x.coordinates.forEach(z => {
             latLngs.push(Object.values(z))
         })
-        return <Polyline key={x.id} positions={[latLngs]} color={color} />
+        return <Polyline key={x.id} positions={[latLngs]} color={z} />
+    }
+    const stops = () => {
+        if (route.name) {
+            return route.stops.map((x, index) => renderStops(x, index))
+        }
+    }
+    const segments = () => {
+        if (route.name) {
+            return route.segments.map(x => renderSegments(x))
+        }
+    }
+    function ChangeView({ center, zoom }) {
+        const map = useMap();
+        map.setView(center, zoom);
+        return null;
     }
 
-    const stopsRouteAB = stopsAB.map((x, index) => renderStops(x, index))
-    const segmentsRouteAB = segmentsAB.map(x => renderSegments(x, '#0078a8'))
-    const stopsRouteBA = stopsBA.map((x, index) => renderStops(x, index))
-    const segmentsRouteBA = segmentsBA.map(x => renderSegments(x, '#377a4aeb'))
-
-
     return <div >
-        <h1>The map</h1>
-        <button onClick={() => dispatch(loading())}>Change loading state</button>
-        <p>isLoading = {isLoading.toString()}</p>
-        <button onClick={() => dispatch(changeAB())}>Show route AB</button>
-        <button onClick={() => dispatch(changeBA())}>Show route BA</button>
         <div id="mapid">
-            <MapContainer center={[42.69181499481202, 23.351221656799318]} zoom={14} scrollWheelZoom={true}>
+            <MapContainer center={mapData.center} zoom={mapData.zoom} scrollWheelZoom={true}>
+                <ChangeView center={mapData.center} zoom={mapData.zoom} />
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {routeType === 'AB' ? <>{stopsRouteAB}{segmentsRouteAB} </> : ''}
-                {routeType === 'BA' ? <>{stopsRouteBA}{segmentsRouteBA} </> : ''}
+                {stops()}{segments()}
             </MapContainer>
         </div>
     </div>

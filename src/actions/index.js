@@ -3,13 +3,21 @@ export const loading = () => {
         type: 'LOADING'
     }
 }
-export const changeAB = () => {
+export const getRoute = (payload) => {
     return {
-        type: 'AB'
+        type: 'GET_ROUTE',
+        payload
     }
 }
-export const changeBA = () => {
+export const getMap = (payload) => {
     return {
-        type: 'BA'
+        type: 'GET_MAP',
+        payload
+    }
+}
+export const toggle = (payload) => {
+    return {
+        type: 'TOGGLE',
+        payload
     }
 }
