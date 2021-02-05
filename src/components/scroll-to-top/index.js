@@ -4,7 +4,7 @@ import './styles.css'
 const ScrollToTop = () => {
 
     const scrollFunction = () => {
-        if (window.scrollY >= 500) {
+        if (window.scrollY >= 400) {
             document.getElementById('stt').style.display = "block";
         } else {
             document.getElementById('stt').style.display = "none";
