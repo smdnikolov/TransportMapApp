@@ -39,32 +39,24 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+## Description
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+A simple react app displaying the stops and routes of a public transportation's bus line on a map.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Task
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+###	Task
 
-### Analyzing the Bundle Size
+The task is to create a simple React app, in order to visualize the routes of a single line of the public transport. Each route consists of stops and segments. The segments represent the space between the different stops. The app should consist of 2 different views:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1.1.	Map - The routes should be displayed on a leaflet-map (both stops and segments should be depicted).
+1.2.	Table - The stops of the routes should be displayed in a table.
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##	Requirements
+2.1.	Redux must be used for data storage.
+2.2.	Leaflet (react-leaflet) must be used for the map visualization.
+2.3.	There must be a dropdown menu to allow switching between the routes.
+2.4.	React Hooks must be used in the components (class components are not allowed).
+2.5.	The request for fetching the data from an API must be mocked.
+2.6.	There are no restrictions in terms of styling frameworks - you can use an existing styling framework of your choice or write your own CSS.
