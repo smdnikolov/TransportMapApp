@@ -35,7 +35,7 @@ const Home = () => {
     const handleToggle = () => {
 
         if (toggler === 'table') {
-            
+
             dispatch(toggle('map'))
         } else {
             document.getElementById("content").scrollIntoView()
@@ -76,7 +76,7 @@ const Home = () => {
                         </div>
                         : <>
                             {route.name
-                                ? <div >
+                                ? <div className='map-table-container'>
                                     <div className={route.name === 'Зоопарка - ж.к. Левски Г' ? 'ab-text' : 'ba-text'}>
                                         <h4>Маршрут:</h4>
                                         <h4>{route.name}</h4>
