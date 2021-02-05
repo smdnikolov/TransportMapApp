@@ -48,6 +48,7 @@ const Map = () => {
     function ChangeView({ center, zoom }) {
         const map = useMap();
         map.setView(center, zoom);
+        document.getElementById("content").scrollIntoView()
         return null;
     }
 

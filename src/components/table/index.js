@@ -18,7 +18,7 @@ const Table = () => {
     const renderTable = (x, index) => {
         return <tr key={x.id}>
             <th scope="row">{++index}</th>
-            <td>{x.name}</td>
+            <td>{x.name.toUpperCase()}</td>
             <td>
                 <button className='btn btn-link' onClick={() => showStop(x)} href=''>Виж на картата</button>
             </td>
@@ -30,7 +30,7 @@ const Table = () => {
         }
     }
 
-    return <table className="table table-striped table-dark">
+    return <table className={"table table-striped " + (route.name === 'Зоопарка - ж.к. Левски Г' ? 'ab' : 'ba')}>
         <thead>
 
             <tr>
