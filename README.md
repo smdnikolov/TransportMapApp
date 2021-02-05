@@ -43,20 +43,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 A simple react app displaying the stops and routes of a public transportation's bus line on a map.
 
-
 ## Task
-
-###	Task
 
 The task is to create a simple React app, in order to visualize the routes of a single line of the public transport. Each route consists of stops and segments. The segments represent the space between the different stops. The app should consist of 2 different views:
 
-1.1.	Map - The routes should be displayed on a leaflet-map (both stops and segments should be depicted).
-1.2.	Table - The stops of the routes should be displayed in a table.
+Map - The routes should be displayed on a leaflet-map (both stops and segments should be depicted).
+Table - The stops of the routes should be displayed in a table.
 
 ##	Requirements
-2.1.	Redux must be used for data storage.
-2.2.	Leaflet (react-leaflet) must be used for the map visualization.
-2.3.	There must be a dropdown menu to allow switching between the routes.
-2.4.	React Hooks must be used in the components (class components are not allowed).
-2.5.	The request for fetching the data from an API must be mocked.
-2.6.	There are no restrictions in terms of styling frameworks - you can use an existing styling framework of your choice or write your own CSS.
+
+Redux must be used for data storage.
+Leaflet (react-leaflet) must be used for the map visualization.
+There must be a dropdown menu to allow switching between the routes.
+React Hooks must be used in the components (class components are not allowed).
+The request for fetching the data from an API must be mocked.
+There are no restrictions in terms of styling frameworks - you can use an existing styling framework of your choice or write your own CSS.
