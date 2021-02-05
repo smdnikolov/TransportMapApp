@@ -53,8 +53,13 @@ Table - The stops of the routes should be displayed in a table.
 ##	Requirements
 
 Redux must be used for data storage.
+
 Leaflet (react-leaflet) must be used for the map visualization.
+
 There must be a dropdown menu to allow switching between the routes.
+
 React Hooks must be used in the components (class components are not allowed).
+
 The request for fetching the data from an API must be mocked.
+
 There are no restrictions in terms of styling frameworks - you can use an existing styling framework of your choice or write your own CSS.
